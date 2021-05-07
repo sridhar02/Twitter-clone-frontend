@@ -1,0 +1,69 @@
+.container{
+  height:100vh;
+  width:100vw;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.formContainer{
+  display:flex;
+  flex-direction:column;
+}
+
+.linksContainer{
+  margin-top:12px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.twitterLogo{
+  margin-top:3rem;
+  height:50px;
+  width:50px;
+}
+
+.head {
+  width:18%;
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:left;
+}
+
+.title{
+  /* color:rgb(29,164,424); */
+  color:#000;
+  font-size:31px;
+  font-weight:600;
+  align-self:left;
+}
+
+.label{
+  margin: 12px 0px;
+}
+
+.input{
+   padding:12px;
+}
+
+.link{
+  text-decoration:none;
+  margin-right:10px;
+  color: rgb(29,161,242);
+}
+
+.link:hover{
+  text-decoration: underline;
+}
+
+.button{
+  border: 1px solid;
+  width: 350px;
+  background: rgb(29,161,242);
+  color:#fff;
+  border-radius: 35px;
+  margin-top:2.5rem;
+  padding:8px 4px;
+}

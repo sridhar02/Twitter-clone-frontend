@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 
-import TweetCard from "./TweetCard"
+import TweetCard from './TweetCard';
 
 import Styles from './Tweets.module.css';
 
@@ -11,12 +11,12 @@ export default function Tweets() {
 
   useEffect(() => {
     const fetchTweets = async () => {
-      let endpoint
+      let endpoint;
       const URL = 'http://localhost:8000';
       if (username) {
-        endpoint = `${URL}/tweets/?username=${username}`
+        endpoint = `${URL}/tweets/?username=${username}`;
       } else {
-        endpoint = `${URL}/tweets`
+        endpoint = `${URL}/tweets`;
       }
       const result = await (await fetch(endpoint)).json();
       setTweets(result);
@@ -34,16 +34,13 @@ export default function Tweets() {
   return (
     <div className={Styles.container}>
       <h1>Tweets page</h1>
-      {tweets.map(tweet =>
-        <div
-          key={tweet.id}
-        >
+      {tweets.map((tweet) => (
+        <div key={tweet.id}>
           <Link to={`/tweet/${tweet.id}`} className={Styles.link}>
-            <TweetCard
-              tweet={tweet} />
+            <TweetCard tweet={tweet} />
           </Link>
         </div>
-      )}
+      ))}
     </div>
   );
 }

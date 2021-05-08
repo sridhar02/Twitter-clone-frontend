@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom"
-import styles from "./login.module.css";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import styles from './login.module.css';
 
 function Icon() {
   return (
@@ -17,10 +17,15 @@ function Icon() {
   );
 }
 
-export default function Login() {
+export default function Login({ setUser, user }) {
   const history = useHistory();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  if (user) {
+    const { username } = user;
+    history.push(`/timeline/${username}`);
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -34,10 +39,11 @@ export default function Login() {
         },
         body: JSON.stringify(data),
       });
+      const res = await response.json();
       if (response.status === 200) {
-        console.log(response)
-        localStorage.setItem('user',JSON.stringify(response.json()))
-        history.push('/');
+        localStorage.setItem('user', JSON.stringify(res));
+        setUser(res);
+        history.push(`/timeline/${res.username}`);
       }
     } catch (error) {
       console.log(error);
@@ -80,7 +86,7 @@ export default function Login() {
         <button className={styles.button}>Log in</button>
         <div className={styles.linksContainer}>
           <a href="/fp" className={styles.link}>
-            {" "}
+            {' '}
             Forgot password
           </a>
           <br />

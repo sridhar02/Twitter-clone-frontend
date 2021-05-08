@@ -3,12 +3,16 @@ import { useHistory } from 'react-router-dom';
 
 import styles from './signup.module.css';
 
-export default function Signup() {
+export default function Signup({ user }) {
   const history = useHistory();
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  if (user) {
+    history.push(`/timeline/${user.username}`);
+  }
 
   const handleSignup = async (event) => {
     event.preventDefault();

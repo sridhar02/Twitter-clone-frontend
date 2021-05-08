@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+
+import styles from "./Tweet.module.css";
 import TweetCard from './TweetCard';
-import Tweets from './Tweets';
 
 export default function Tweet() {
     let { id } = useParams();
@@ -30,7 +31,7 @@ export default function Tweet() {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             {tweet.map(tweet =>
                 <TweetCard tweet={tweet} key={tweet.id} />
             )}

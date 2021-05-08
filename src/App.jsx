@@ -36,7 +36,9 @@ function App() {
   return (
     <Router>
       <nav>
-        <button onClick={handleSignout}>{user ? 'Logout' : 'Login'}</button>
+        {user ? (
+          <button onClick={handleSignout}>{user ? 'Logout' : 'Login'}</button>
+        ) : null}
       </nav>
       <Switch>
         <Route exact path="/">

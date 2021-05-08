@@ -87,6 +87,11 @@ export default function Signup({ user }) {
         <button className={styles.button} type="submit">
           Sign up
         </button>
+        <div className={styles.linksContainer}>
+          <a href="/login" className={styles.link}>
+            Already have an account ?
+          </a>
+        </div>
       </form>
     </div>
   );

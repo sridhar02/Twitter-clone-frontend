@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import swal from 'sweetalert';
 import styles from './login.module.css';
 
 function Icon() {
@@ -39,12 +41,14 @@ export default function Login({ setUser, user }) {
         },
         body: JSON.stringify(data),
       });
-      const res = await response.json();
       if (response.status === 200) {
-        localStorage.setItem('user', JSON.stringify(res));
+        const res = await response.json();
         setUser(res);
+        localStorage.setItem('user', JSON.stringify(res));
         history.push(`/timeline/${res.username}`);
       }
+      // return;
+      // swal('Oops', 'Your Password is wrong!', 'error');
     } catch (error) {
       console.log(error);
     }

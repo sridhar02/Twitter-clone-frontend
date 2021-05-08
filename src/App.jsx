@@ -5,6 +5,7 @@ import Login from "./components/login.jsx";
 import Signup from "./components/signup.jsx";
 import Tweets from "./components/Tweets.jsx";
 import Tweet from "./components/Tweet"
+import TimeLine from "./components/TimeLine"
 
 
 function NotFound() {
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route exact path="/signup">
           <Signup />
+        </Route>
+        <Route exact path="/timeline/:username">
+          <TimeLine />
         </Route>
         <Route exact path="/tweet/:id">
           <Tweet />

@@ -48,7 +48,7 @@ export default function TimeLine({ user }) {
       {tweets.map((tweet) => (
         <div key={tweet.id}>
           <Link to={`/tweet/${tweet.id}`} className={styles.link}>
-            <TweetCard tweet={tweet} />
+            <TweetCard tweet={tweet} user={user} fetchTweets={fetchTweets} />
           </Link>
         </div>
       ))}

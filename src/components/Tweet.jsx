@@ -1,27 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import styles from './Tweet.module.css';
 import TweetCard from './TweetCard';
 
-export default function Tweet() {
+export default function Tweet({ user }) {
   let { id } = useParams();
+  let history = useHistory();
   const [tweet, setTweet] = useState(null);
+  if (!user) {
+    history.push('/login');
+  }
 
+  const fetchTweet = async () => {
+    let endpoint;
+    const URL = 'http://localhost:8000';
+    if (id) {
+      endpoint = `${URL}/tweets/?tweetId=${id}`;
+    } else {
+      endpoint = `${URL}/tweets`;
+    }
+    const result = await (await fetch(endpoint)).json();
+    setTweet(result);
+  };
   useEffect(() => {
-    const fetchTweet = async () => {
-      let endpoint;
-      const URL = 'http://localhost:8000';
-      if (id) {
-        endpoint = `${URL}/tweets/?tweetId=${id}`;
-      } else {
-        endpoint = `${URL}/tweets`;
-      }
-      const result = await (await fetch(endpoint)).json();
-      setTweet(result);
+    const fetchData = async () => {
+      fetchTweet();
     };
-
-    fetchTweet();
+    fetchData();
   }, [id]);
 
   if (!tweet) {
@@ -31,7 +37,12 @@ export default function Tweet() {
   return (
     <div className={styles.container}>
       {tweet.map((tweet) => (
-        <TweetCard tweet={tweet} key={tweet.id} />
+        <TweetCard
+          tweet={tweet}
+          key={tweet.id}
+          user={user}
+          fetchTweet={fetchTweet}
+        />
       ))}
     </div>
   );

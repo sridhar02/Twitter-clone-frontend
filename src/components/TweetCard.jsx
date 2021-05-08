@@ -20,7 +20,7 @@ export default function TweetCard({ tweet }) {
         alt="user profile logo"
         className={styles.profileImg}
       />
-      <div>
+      <div className={styles.tweetContainer}>
         <div className={styles.head}>
           <div className={styles.subHeader}>
             <p className={styles.name}>{user.name}</p>

@@ -25,8 +25,6 @@ export default function Tweets() {
     fetchTweets();
   }, []);
 
-  console.log(username, tweets);
-
   if (tweets.length === 0) {
     return <div>Loading....</div>;
   }

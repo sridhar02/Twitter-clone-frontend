@@ -1,0 +1,19 @@
+.container {
+  /* background-color: #ff6600; */
+}
+
+.link {
+  text-decoration: none;
+  color: #000;
+}
+
+.tweetsContainer {
+  border-left: 10px solid red;
+  border-right: 10px solid red;
+}
+
+.newTweet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

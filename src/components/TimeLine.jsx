@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 
 import NewTweet from './NewTweet';
 import TweetCard from './TweetCard';
 
 import styles from './TimeLine.module.css';
 
-export default function TimeLine() {
+export default function TimeLine({ user }) {
+  let history = useHistory();
   let { username } = useParams();
   const [tweets, setTweets] = useState(null);
 
@@ -20,6 +21,11 @@ export default function TimeLine() {
     const result = await (await fetch(endpoint)).json();
     setTweets(result);
   };
+
+  if (!user) {
+    history.push('/login');
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       fetchTweets();
@@ -36,7 +42,7 @@ export default function TimeLine() {
         timeline
       </h2>
       <div className={styles.newTweet}>
-        <NewTweet fetchTweets={fetchTweets} />
+        <NewTweet fetchTweets={fetchTweets} user={user} />
       </div>
       {/* <div className={styles.tweetsContainer}> */}
       {tweets.map((tweet) => (

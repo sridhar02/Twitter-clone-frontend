@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import styles from './NewTweet.module.css';
 
-export default function NewTweet({ fetchTweets }) {
+export default function NewTweet({ fetchTweets, user }) {
   const [inputText, setInputText] = useState('');
-  const user = {
+  const testUser = {
     id: 1,
     username: 'sridhar02',
     name: 'JamesBond',
@@ -15,7 +15,7 @@ export default function NewTweet({ fetchTweets }) {
   const postTweet = async () => {
     const data = {
       text: inputText,
-      userId: 1,
+      userId: user.id,
     };
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/tweet`, {
@@ -37,7 +37,7 @@ export default function NewTweet({ fetchTweets }) {
   return (
     <div className={styles.container}>
       <img
-        src={user.profileImg}
+        src={testUser.profileImg}
         alt="user profile logo"
         className={styles.profileImg}
       />

@@ -48,7 +48,7 @@ function App() {
       <>
         <Navbar setUser={setUser} user={user} />
         <Switch>
-          <Route exact to="/signup">
+          <Route exact path="/signup">
             <Signup />
           </Route>
           <Route exact path="/login">

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import swal from 'sweetalert';
 import styles from './login.module.css';
 
 function Icon() {
@@ -19,15 +18,10 @@ function Icon() {
   );
 }
 
-export default function Login({ setUser, user }) {
+export default function Login({ setUser }) {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  if (user) {
-    const { username } = user;
-    history.push(`/timeline/${username}`);
-  }
 
   const handleLogin = async (e) => {
     e.preventDefault();

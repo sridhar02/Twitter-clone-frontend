@@ -8,9 +8,6 @@ export default function Tweet({ user }) {
   let { id } = useParams();
   let history = useHistory();
   const [tweet, setTweet] = useState(null);
-  if (!user) {
-    history.push('/login');
-  }
 
   const fetchTweet = async () => {
     let endpoint;

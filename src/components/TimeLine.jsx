@@ -9,6 +9,7 @@ import styles from './TimeLine.module.css';
 export default function TimeLine({ user }) {
   let history = useHistory();
   let { username } = useParams();
+
   const [tweets, setTweets] = useState(null);
 
   const fetchTweets = async () => {
@@ -22,10 +23,6 @@ export default function TimeLine({ user }) {
     setTweets(result);
   };
 
-  if (!user) {
-    history.push('/login');
-  }
-
   useEffect(() => {
     const fetchData = async () => {
       fetchTweets();
@@ -38,13 +35,12 @@ export default function TimeLine({ user }) {
   return (
     <div className={styles.container}>
       <h2>
-        {username} Timeline router and ability to create a new tweet from the
-        timeline
+        {username}
+        Timeline router and ability to create a new tweet from the timeline
       </h2>
       <div className={styles.newTweet}>
         <NewTweet fetchTweets={fetchTweets} user={user} />
       </div>
-      {/* <div className={styles.tweetsContainer}> */}
       {tweets.map((tweet) => (
         <div key={tweet.id}>
           <Link to={`/tweet/${tweet.id}`} className={styles.link}>
@@ -52,7 +48,6 @@ export default function TimeLine({ user }) {
           </Link>
         </div>
       ))}
-      {/* </div> */}
     </div>
   );
 }

@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory,
-  Redirect,
-} from 'react-router-dom';
+import { Switch, Route, useHistory, Redirect } from 'react-router-dom';
 
 import Login from './components/login';
 import Signup from './components/signup';
@@ -44,33 +38,34 @@ function Navbar({ user, setUser }) {
 function App() {
   const [user, setUser] = useState(() => {
     const u = JSON.parse(localStorage.getItem('user'));
-    if (u !== undefined) {
+    if (u) {
       return u;
     }
-    return undefined;
   });
 
   if (user === undefined) {
     return (
-      <Switch>
+      <>
         <Navbar setUser={setUser} user={user} />
-        <Route exact to="/signup">
-          <Signup />
-        </Route>
-        <Route exact path="/login">
-          <Login user={user} setUser={setUser} />
-        </Route>
-        <Route>
-          <Redirect to="/login" />
-        </Route>
-      </Switch>
+        <Switch>
+          <Route exact to="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/login">
+            <Login user={user} setUser={setUser} />
+          </Route>
+          <Route>
+            <Redirect to="/login" />
+          </Route>
+        </Switch>
+      </>
     );
   }
 
   return (
     <>
+      <Navbar setUser={setUser} user={user} />
       <Switch>
-        <Navbar setUser={setUser} user={user} />
         <Route exact path="/">
           <div> Main route handler</div>
         </Route>

@@ -7,48 +7,72 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import Login from './components/login.jsx';
-import Signup from './components/signup.jsx';
-import Tweets from './components/Tweets.jsx';
+import Login from './components/login';
+import Signup from './components/signup';
+import Tweets from './components/Tweets';
 import Tweet from './components/Tweet';
 import TimeLine from './components/TimeLine';
 
 function NotFound() {
   return (
     <div>
-      <h2>This route doesn't exist</h2>
+      <h2>This route doesn\'\t exist</h2>
     </div>
   );
 }
 
-function App() {
-  let history = useHistory();
-  const [user, setUser] = useState(() =>
-    JSON.parse(localStorage.getItem('user'))
-  );
+function Navbar({ user, setUser }) {
+  const history = useHistory();
 
   const handleSignout = () => {
     localStorage.removeItem('user');
-    setUser('');
-    // history.push('/');
+    setUser(undefined);
+    history.push('/');
   };
 
   return (
-    <Router>
-      <nav>
-        {user ? (
-          <button onClick={handleSignout}>{user ? 'Logout' : 'Login'}</button>
-        ) : null}
-      </nav>
+    <nav>
+      {user ? (
+        <button type="button" onClick={handleSignout}>
+          {user ? 'Logout' : 'Login'}
+        </button>
+      ) : null}
+    </nav>
+  );
+}
+
+function App() {
+  const [user, setUser] = useState(() => {
+    const u = JSON.parse(localStorage.getItem('user'));
+    if (u !== undefined) {
+      return u;
+    }
+    return undefined;
+  });
+
+  if (user === undefined) {
+    return (
       <Switch>
-        <Route exact path="/">
-          <div> Main route handler</div>
+        <Navbar setUser={setUser} user={user} />
+        <Route exact to="/signup">
+          <Signup />
         </Route>
         <Route exact path="/login">
           <Login user={user} setUser={setUser} />
         </Route>
-        <Route exact path="/signup">
-          <Signup user={user} />
+        <Route>
+          <Redirect to="/login" />
+        </Route>
+      </Switch>
+    );
+  }
+
+  return (
+    <>
+      <Switch>
+        <Navbar setUser={setUser} user={user} />
+        <Route exact path="/">
+          <div> Main route handler</div>
         </Route>
         <Route exact path="/timeline/:username">
           <TimeLine user={user} />
@@ -66,7 +90,7 @@ function App() {
           <NotFound />
         </Route>
       </Switch>
-    </Router>
+    </>
   );
 }
 

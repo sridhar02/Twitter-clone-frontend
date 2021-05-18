@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import styles from './Tweet.module.css';
 import TweetCard from './TweetCard';
 
 export default function Tweet({ user }) {
-  let { id } = useParams();
-  let history = useHistory();
+  const { id } = useParams();
   const [tweet, setTweet] = useState(null);
 
   const fetchTweet = async () => {
     let endpoint;
-    const URL = 'http://localhost:8000';
+    const URL = `${import.meta.env.VITE_API_URL}`;
     if (id) {
       endpoint = `${URL}/tweets/?tweetId=${id}`;
     } else {
@@ -20,6 +19,7 @@ export default function Tweet({ user }) {
     const result = await (await fetch(endpoint)).json();
     setTweet(result);
   };
+
   useEffect(() => {
     const fetchData = async () => {
       fetchTweet();

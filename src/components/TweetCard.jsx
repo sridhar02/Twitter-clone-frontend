@@ -1,19 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
 
-import styles from './TweetCard.module.css';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { FaRegHeart, FaRegEnvelope, FaRegCommentAlt } from 'react-icons/fa';
 
-export default function TweetCard({ tweet, user, fetchTweet }) {
-  const {
-    text,
-    id,
-    likesCount,
-    retweetsCount,
-    commentsCount,
-    updatedAt,
-  } = tweet;
+import styles from './TweetCard.module.css';
+
+export default function TweetCard({ tweet, user }) {
+  const [likes, setLikes] = useState(() => tweet.likesCount);
+
+  const { text, id, updatedAt } = tweet;
+
   const testUser = {
     username: 'sridhar02',
     name: 'JamesBond',
@@ -21,7 +18,9 @@ export default function TweetCard({ tweet, user, fetchTweet }) {
       'https://media.gettyimages.com/photos/home-office-picture-id1193214720?k=6&m=1193214720&s=612x612&w=0&h=PG-IQkhXnBoKPFgErSLEwbDuAztvfXJjAg83tSr1RGA=',
   };
 
-  const postLike = async () => {
+  const postLike = async (e) => {
+    // e.propagation();
+    e.preventDefault();
     const data = {
       tweetId: id,
       userId: user.id,
@@ -36,7 +35,7 @@ export default function TweetCard({ tweet, user, fetchTweet }) {
         body: JSON.stringify(data),
       });
       if (response.status === 201) {
-        fetchTweet();
+        setLikes((prevState) => prevState + 1);
       }
     } catch (error) {
       alert(error);
@@ -66,14 +65,13 @@ export default function TweetCard({ tweet, user, fetchTweet }) {
         <div className={styles.icons}>
           <span>
             <FaRegCommentAlt />
-            {commentsCount}
           </span>
           <span>
             <AiOutlineRetweet />
-            {retweetsCount}
           </span>
-          <button onClick={postLike}>
-            <FaRegHeart /> {likesCount}
+          <button type="button" onClick={(e) => postLike(e)}>
+            <FaRegHeart />
+            {likes}
           </button>
           <FaRegEnvelope />
         </div>

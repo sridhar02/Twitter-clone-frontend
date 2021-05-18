@@ -41,8 +41,6 @@ export default function Login({ setUser }) {
         localStorage.setItem('user', JSON.stringify(res));
         history.push(`/timeline/${res.username}`);
       }
-      // return;
-      // swal('Oops', 'Your Password is wrong!', 'error');
     } catch (error) {
       console.log(error);
     }
@@ -81,7 +79,9 @@ export default function Login({ setUser }) {
             placeholder="Password"
           />
         </div>
-        <button className={styles.button}>Log in</button>
+        <button type="submit" className={styles.button}>
+          Log in
+        </button>
         <div className={styles.linksContainer}>
           <a href="/fp" className={styles.link}>
             {' '}

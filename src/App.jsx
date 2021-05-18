@@ -6,14 +6,8 @@ import Signup from './components/signup';
 import Tweets from './components/Tweets';
 import Tweet from './components/Tweet';
 import TimeLine from './components/TimeLine';
-
-function NotFound() {
-  return (
-    <div>
-      <h2>This route doesn\'\t exist</h2>
-    </div>
-  );
-}
+import Followers from './components/Followers';
+import Following from './components/Following';
 
 function Navbar({ user, setUser }) {
   const history = useHistory();
@@ -46,7 +40,6 @@ function App() {
   if (user === undefined) {
     return (
       <>
-        <Navbar setUser={setUser} user={user} />
         <Switch>
           <Route exact path="/signup">
             <Signup />
@@ -75,14 +68,20 @@ function App() {
         <Route exact path="/tweet/:id">
           <Tweet user={user} />
         </Route>
-        <Route exact path="/tweets/:username">
-          <Tweets user={user} />
+        <Route exact path="/:username">
+          <Tweets AuthUser={user} />
         </Route>
         <Route path="/tweets">
-          <Tweets />
+          <Tweets user={user} />
         </Route>
-        <Route path="*">
-          <NotFound />
+        <Route path="/followers">
+          <Followers user={user} />
+        </Route>
+        <Route path="/following">
+          <Following user={user} />
+        </Route>
+        <Route>
+          <Redirect to={`/timeline/${user.username}`} />
         </Route>
       </Switch>
     </>

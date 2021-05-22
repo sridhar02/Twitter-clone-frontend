@@ -42,6 +42,7 @@ export default function Signup() {
             id="name"
             type="text"
             vlaue={name}
+            required
             placeholder="Name"
             className={styles.input}
             onChange={(e) => setName(e.target.value)}
@@ -54,6 +55,7 @@ export default function Signup() {
             id="username"
             placeholder="Username"
             vlaue={username}
+            required
             className={styles.input}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -65,6 +67,7 @@ export default function Signup() {
             id="email"
             placeholder="Name"
             value={email}
+            required
             className={styles.input}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -76,6 +79,7 @@ export default function Signup() {
             id="password"
             placeholder="password"
             value={password}
+            required
             className={styles.input}
             onChange={(e) => setPassword(e.target.value)}
           />

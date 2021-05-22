@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import faker from 'faker';
 
 import Styles from './profile.module.css';
@@ -32,12 +34,19 @@ export default function Profile({ AuthUser, user }) {
       alert(error);
     }
   };
+
+  const handleEditUser = () => {};
+
   return (
     <div className={Styles.userContainer}>
       <div className={Styles.profileImgContainer}>
         {AuthUser.name !== user.name ? (
           <>
-            <img src={img} alt="profile logo" className={Styles.profileImage} />
+            <img
+              src={user.profileImage}
+              alt="profile logo"
+              className={Styles.profileImage}
+            />
             <button
               type="button"
               onClick={handleFollow}
@@ -47,7 +56,20 @@ export default function Profile({ AuthUser, user }) {
             </button>
           </>
         ) : (
-          <img src={userImage} alt="" className={Styles.profileImage} />
+          <>
+            <img
+              src={AuthUser.profileImage}
+              alt=""
+              className={Styles.profileImage}
+            />
+            <button
+              type="button"
+              onClick={handleEditUser}
+              className={Styles.button}
+            >
+              Edit profile
+            </button>
+          </>
         )}
       </div>
       <div className={Styles.profileDetails}>
@@ -61,13 +83,15 @@ export default function Profile({ AuthUser, user }) {
           <div className={Styles.joinedDate}>Joined December 2020</div>
         </div>
         <div className={Styles.followContainer}>
-          <div>
+          <Link to="/followers">
             <span className={Styles.count}>{user.followersCount}</span>
             Followers
-          </div>
+          </Link>
           <div className={Styles.following}>
-            <span className={Styles.count}>{user.followingCount}</span>
-            Following
+            <Link to="/following">
+              <span className={Styles.count}>{user.followingCount}</span>
+              Following
+            </Link>
           </div>
         </div>
       </div>

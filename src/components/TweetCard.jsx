@@ -45,7 +45,7 @@ export default function TweetCard({ tweet, user }) {
   return (
     <div className={styles.container}>
       <img
-        src={testUser.profileImg}
+        src={user.profileImage}
         alt="user profile logo"
         className={styles.profileImg}
       />

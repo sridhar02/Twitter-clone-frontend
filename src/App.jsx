@@ -60,12 +60,12 @@ function App() {
       <Navbar setUser={setUser} user={user} />
       <Switch>
         <Route exact path="/">
-          <div> Main route handler</div>
+          <Tweets />
         </Route>
-        <Route exact path="/timeline/:username">
+        <Route path="/timeline/:username">
           <TimeLine user={user} />
         </Route>
-        <Route exact path="/tweet/:id">
+        <Route path="/tweet/:id">
           <Tweet user={user} />
         </Route>
         <Route exact path="/:username">

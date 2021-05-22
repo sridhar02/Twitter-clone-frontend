@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './NewTweet.module.css';
 
@@ -36,11 +37,13 @@ export default function NewTweet({ fetchTweets, user }) {
 
   return (
     <div className={styles.container}>
-      <img
-        src={testUser.profileImg}
-        alt="user profile logo"
-        className={styles.profileImg}
-      />
+      <Link to={`/${user.username}`}>
+        <img
+          src={user.profileImage}
+          alt="user profile logo"
+          className={styles.profileImg}
+        />
+      </Link>
       <div className={styles.inputContainer}>
         <input
           placeholder="What's happening?"

@@ -63,6 +63,7 @@ export default function Login({ setUser }) {
             type="email"
             name="email"
             value={email}
+            required
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Phone,email, or username"
           />
@@ -74,6 +75,7 @@ export default function Login({ setUser }) {
             id="password"
             type="password"
             name="password"
+            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"

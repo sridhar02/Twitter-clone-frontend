@@ -49,7 +49,7 @@ export default function Tweets({ AuthUser }) {
 
   return (
     <div className={Styles.container}>
-      <Profile user={user} AuthUser={AuthUser} />
+      {/* <Profile user={user} AuthUser={AuthUser} /> */}
       {tweets.map((tweet) => (
         <div key={tweet.id}>
           <Link to={`/tweet/${tweet.id}`} className={Styles.link}>

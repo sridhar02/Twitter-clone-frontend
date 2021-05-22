@@ -5,7 +5,7 @@ import faker from 'faker';
 
 import Styles from './profile.module.css';
 
-export default function Profile({ AuthUser, user }) {
+export default function Profile({ authUser, user }) {
   const img = faker.image.avatar();
 
   const userImage =
@@ -15,7 +15,7 @@ export default function Profile({ AuthUser, user }) {
     const URL = import.meta.env.VITE_API_URL;
 
     const data = {
-      userId: AuthUser.id,
+      userId: authUser.id,
       followerId: user.id,
     };
     try {
@@ -40,7 +40,7 @@ export default function Profile({ AuthUser, user }) {
   return (
     <div className={Styles.userContainer}>
       <div className={Styles.profileImgContainer}>
-        {AuthUser.name !== user.name ? (
+        {authUser.name !== user.name ? (
           <>
             <img
               src={user.profileImage}
@@ -58,7 +58,7 @@ export default function Profile({ AuthUser, user }) {
         ) : (
           <>
             <img
-              src={AuthUser.profileImage}
+              src={authUser.profileImage}
               alt=""
               className={Styles.profileImage}
             />

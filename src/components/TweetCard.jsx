@@ -45,15 +45,15 @@ export default function TweetCard({ tweet, user }) {
   return (
     <div className={styles.container}>
       <img
-        src={user.profileImage}
+        src={tweet.user.profileImage}
         alt="user profile logo"
         className={styles.profileImg}
       />
       <div className={styles.tweetContainer}>
         <div className={styles.head}>
           <div className={styles.subHeader}>
-            <p className={styles.name}>{user.name}</p>
-            <p className={styles.username}>@{user.username}</p>
+            <p className={styles.name}>{tweet.user.name}</p>
+            <p className={styles.username}>@{tweet.user.username}</p>
             <p className={styles.dot}>.</p>
             <p className={styles.time}>
               {formatDistanceToNowStrict(parseISO(updatedAt))}

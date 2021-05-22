@@ -39,7 +39,6 @@ export default function Login({ setUser }) {
         const res = await response.json();
         setUser(res);
         localStorage.setItem('user', JSON.stringify(res));
-        history.push(`/timeline/${res.username}`);
       }
     } catch (error) {
       console.log(error);

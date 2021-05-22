@@ -59,17 +59,14 @@ function App() {
     <>
       <Navbar setUser={setUser} user={user} />
       <Switch>
-        <Route exact path="/">
-          <Tweets />
+        <Route path="/login">
+          <Redirect to={`/timeline/${user.username}`} />
         </Route>
         <Route path="/timeline/:username">
           <TimeLine user={user} />
         </Route>
         <Route path="/tweet/:id">
           <Tweet user={user} />
-        </Route>
-        <Route exact path="/:username">
-          <Tweets AuthUser={user} />
         </Route>
         <Route path="/tweets">
           <Tweets user={user} />
@@ -79,6 +76,12 @@ function App() {
         </Route>
         <Route path="/following">
           <Following user={user} />
+        </Route>
+        <Route path="/:username">
+          <Tweets authUser={user} />
+        </Route>
+        <Route exact path="/">
+          <Tweets />
         </Route>
         <Route>
           <Redirect to={`/timeline/${user.username}`} />

@@ -3,20 +3,17 @@ import { Link } from 'react-router-dom';
 
 import faker from 'faker';
 
-import Styles from './profile.module.css';
+import Styles from './profileContainer.module.css';
 
-export default function Profile({ authUser, user }) {
+export default function ProfileContainer({ user, authUser }) {
   const img = faker.image.avatar();
-
-  const userImage =
-    'https://media.gettyimages.com/photos/home-office-picture-id1193214720?k=6&m=1193214720&s=612x612&w=0&h=PG-IQkhXnBoKPFgErSLEwbDuAztvfXJjAg83tSr1RGA=';
 
   const handleFollow = async () => {
     const URL = import.meta.env.VITE_API_URL;
 
     const data = {
-      userId: authUser.id,
-      followerId: user.id,
+      userId: user.id,
+      followerId: authUser.id,
     };
     try {
       const response = await fetch(`${URL}/follow`, {
@@ -83,12 +80,12 @@ export default function Profile({ authUser, user }) {
           <div className={Styles.joinedDate}>Joined December 2020</div>
         </div>
         <div className={Styles.followContainer}>
-          <Link to="/followers">
+          <Link to={`/${user.name}/followers`}>
             <span className={Styles.count}>{user.followersCount}</span>
             Followers
           </Link>
           <div className={Styles.following}>
-            <Link to="/following">
+            <Link to={`/${user.name}/following`}>
               <span className={Styles.count}>{user.followingCount}</span>
               Following
             </Link>

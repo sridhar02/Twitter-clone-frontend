@@ -42,3 +42,13 @@ p {
   border-radius: 35px;
   padding: 4.5px 12px;
 }
+.tabs {
+  width: 632.5px;
+}
+
+.tabList {
+  /* display: flex; */
+  justify-content: space-around;
+  padding: 0.5rem;
+  background-color: #fff;
+}

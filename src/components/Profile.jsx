@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import ProfileContainer from './ProfileContainer';
 
 import Styles from './profile.module.css';
+import Tweets from './Tweets';
 
 const fetchUser = async (username) => {
   const response = await axios.get('/user', {
@@ -31,6 +32,7 @@ export default function Profile({ authUser }) {
         <ProfileContainer user={user} authUser={authUser} />
       </div>
       {/* user tweets container */}
+      {/* <Tweets user={user} username={username} /> */}
     </div>
   );
 }

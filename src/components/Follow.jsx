@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import Followers from './Followers';
 import Following from './Following';
 
 import css from './follow.module.css';
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs';
+import '@reach/tabs/styles.css';
 
 const fetchUser = async (username) => {
   const response = await axios.get('/user', {
@@ -17,6 +19,7 @@ const fetchUser = async (username) => {
 };
 
 export default function Follow() {
+  const history = useHistory();
   const { username, followType } = useParams();
   const [user, setUser] = useState('');
 
@@ -26,18 +29,26 @@ export default function Follow() {
     }
   }, [username]);
 
-  let component;
-  if (followType === 'followers') {
-    component = <Followers user={user} css={css} />;
-  } else {
-    component = <Following user={user} css={css} />;
-  }
+  const changeToFollowing = () => {
+    history.push(`/${username}/following`);
+  };
 
   return (
     <div className={css.container}>
-      <p>{username}</p>
-      <p>{followType}</p>
-      {component}
+      <Tabs className={css.tabs}>
+        <TabList className={css.tabList}>
+          <Tab>Followers</Tab>
+          <Tab>Following</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <Followers user={user} css={css} />
+          </TabPanel>
+          <TabPanel>
+            <Following user={user} css={css} />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
     </div>
   );
 }

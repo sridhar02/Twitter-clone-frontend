@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
 
 import { AiOutlineRetweet } from 'react-icons/ai';
@@ -7,16 +8,10 @@ import { FaRegHeart, FaRegEnvelope, FaRegCommentAlt } from 'react-icons/fa';
 import styles from './TweetCard.module.css';
 
 export default function TweetCard({ tweet, user }) {
+  const history = useHistory();
   const [likes, setLikes] = useState(() => tweet.likesCount);
 
   const { text, id, updatedAt } = tweet;
-
-  const testUser = {
-    username: 'sridhar02',
-    name: 'JamesBond',
-    profileImg:
-      'https://media.gettyimages.com/photos/home-office-picture-id1193214720?k=6&m=1193214720&s=612x612&w=0&h=PG-IQkhXnBoKPFgErSLEwbDuAztvfXJjAg83tSr1RGA=',
-  };
 
   const postLike = async (e) => {
     // e.propagation();
@@ -42,13 +37,20 @@ export default function TweetCard({ tweet, user }) {
     }
   };
 
+  const openProfile = (e) => {
+    e.preventDefault();
+    history.push(`/${tweet.user.username}`);
+  };
+
   return (
     <div className={styles.container}>
-      <img
-        src={tweet.user.profileImage}
-        alt="user profile logo"
-        className={styles.profileImg}
-      />
+      <div onClick={(e) => openProfile(e)}>
+        <img
+          className={styles.profileImg}
+          src={tweet.user.profileImage}
+          alt="user profile logo"
+        />
+      </div>
       <div className={styles.tweetContainer}>
         <div className={styles.head}>
           <div className={styles.subHeader}>

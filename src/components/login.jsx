@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -19,26 +20,17 @@ function Icon() {
 }
 
 export default function Login({ setUser }) {
-  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const API_URL = 'http://localhost:8000';
     const data = { email, password };
     try {
-      const response = await fetch(`${API_URL}/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      if (response.status === 200) {
-        const res = await response.json();
-        setUser(res);
-        localStorage.setItem('user', JSON.stringify(res));
+      const res = await axios.post('/login', data);
+      if (res.status === 200) {
+        setUser(res.data);
+        localStorage.setItem('user', JSON.stringify(res.data));
       }
     } catch (error) {
       console.log(error);

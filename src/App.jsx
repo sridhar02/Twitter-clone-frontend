@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Switch, Route, useHistory, Redirect } from 'react-router-dom';
 
 import Login from './components/login';
-import Signup from './components/signup';
-import Tweets from './components/Tweets';
 import Tweet from './components/Tweet';
+import Tweets from './components/Tweets';
+import Signup from './components/signup';
+import Profile from './components/Profile';
 import TimeLine from './components/TimeLine';
 import Followers from './components/Followers';
 import Following from './components/Following';
+import Follow from './components/Follow';
+
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 function Navbar({ user, setUser }) {
   const history = useHistory();
@@ -60,7 +65,7 @@ function App() {
       <Navbar setUser={setUser} user={user} />
       <Switch>
         <Route path="/login">
-          <Redirect to={`/timeline/${user.username}`} />
+          <Redirect to="/" />
         </Route>
         <Route path="/timeline/:username">
           <TimeLine user={user} />
@@ -71,17 +76,17 @@ function App() {
         <Route path="/tweets">
           <Tweets user={user} />
         </Route>
-        <Route path="/followers">
-          <Followers user={user} />
+        <Route exact path="/:username/:followType">
+          <Follow user={user} />
         </Route>
-        <Route path="/following">
+        {/* <Route exact path="/:username/following">
           <Following user={user} />
-        </Route>
-        <Route path="/:username">
-          <Tweets authUser={user} />
+        </Route> */}
+        <Route exact path="/:username">
+          <Profile authUser={user} />
         </Route>
         <Route exact path="/">
-          <Tweets />
+          <Tweets user={user} />
         </Route>
         <Route>
           <Redirect to={`/timeline/${user.username}`} />

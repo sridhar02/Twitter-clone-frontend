@@ -1,30 +1,27 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import styles from './Tweet.module.css';
 import TweetCard from './TweetCard';
 
+const URL = `${import.meta.env.VITE_API_URL}`;
+
+const fetchTweet = async (id) => {
+  const response = await axios.get(`${URL}/tweets`, {
+    params: {
+      tweetId: id,
+    },
+  });
+  return response.data;
+};
+
 export default function Tweet({ user }) {
   const { id } = useParams();
   const [tweet, setTweet] = useState(null);
 
-  const fetchTweet = async () => {
-    let endpoint;
-    const URL = `${import.meta.env.VITE_API_URL}`;
-    if (id) {
-      endpoint = `${URL}/tweets/?tweetId=${id}`;
-    } else {
-      endpoint = `${URL}/tweets`;
-    }
-    const result = await (await fetch(endpoint)).json();
-    setTweet(result);
-  };
-
   useEffect(() => {
-    const fetchData = async () => {
-      fetchTweet();
-    };
-    fetchData();
+    fetchTweet(id).then((data) => setTweet(data));
   }, [id]);
 
   if (!tweet) {

@@ -47,6 +47,7 @@ export default function Tweets({ user }) {
 
   return (
     <div className={Styles.container}>
+      <NewTweet user={user} setOffset={setOffset} />
       <InfiniteScroll
         dataLength={tweets.length}
         next={onNext}

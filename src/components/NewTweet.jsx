@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import styles from './NewTweet.module.css';
 
-export default function NewTweet({ user }) {
+export default function NewTweet({ user, setOffset }) {
   const [inputText, setInputText] = useState('');
 
   const postTweet = async () => {

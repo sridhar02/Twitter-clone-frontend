@@ -10,3 +10,12 @@
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
 }
+
+.tabs {
+  /* width: 50%; */
+}
+
+.tabList {
+  justify-content: space-around;
+  padding: 12px 16px;
+}

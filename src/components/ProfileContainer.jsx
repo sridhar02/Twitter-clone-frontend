@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import faker from 'faker';
 
-import Styles from './profileContainer.module.css';
+import css from './profileContainer.module.css';
 
 export default function ProfileContainer({ user, authUser }) {
   const img = faker.image.avatar();
@@ -35,20 +35,16 @@ export default function ProfileContainer({ user, authUser }) {
   const handleEditUser = () => {};
 
   return (
-    <div className={Styles.userContainer}>
-      <div className={Styles.profileImgContainer}>
+    <div className={css.userContainer}>
+      <div className={css.profileImgContainer}>
         {authUser.name !== user.name ? (
           <>
             <img
               src={user.profileImage}
               alt="profile logo"
-              className={Styles.profileImage}
+              className={css.profileImage}
             />
-            <button
-              type="button"
-              onClick={handleFollow}
-              className={Styles.button}
-            >
+            <button type="button" onClick={handleFollow} className={css.button}>
               Follow
             </button>
           </>
@@ -57,36 +53,36 @@ export default function ProfileContainer({ user, authUser }) {
             <img
               src={authUser.profileImage}
               alt=""
-              className={Styles.profileImage}
+              className={css.profileImage}
             />
             <button
               type="button"
               onClick={handleEditUser}
-              className={Styles.button}
+              className={css.button}
             >
               Edit profile
             </button>
           </>
         )}
       </div>
-      <div className={Styles.profileDetails}>
-        <span className={Styles.name}>{user.name}</span>
-        <span className={Styles.username}>@{user.username}</span>
-        <div className={Styles.bio}>
+      <div className={css.profileDetails}>
+        <span className={css.name}>{user.name}</span>
+        <span className={css.username}>@{user.username}</span>
+        <div className={css.bio}>
           ᴬ ᶠʳᵉᵉ 🦜 | ᵗᵉᶜʰⁱᵉ | ˢᵖⁱʳⁱᵗᵘᵃˡ ᵇᵉⁱⁿᵍ ᵒⁿ ᵃ ʰᵘᵐᵃⁿ ʲᵒᵘʳⁿᵉʸ
         </div>
-        <div className={Styles.joinContainer}>
+        <div className={css.joinContainer}>
           <div>Bengaluru, India</div>
-          <div className={Styles.joinedDate}>Joined December 2020</div>
+          <div className={css.joinedDate}>Joined December 2020</div>
         </div>
-        <div className={Styles.followContainer}>
-          <Link to={`/${user.name}/followers`}>
-            <span className={Styles.count}>{user.followersCount}</span>
+        <div className={css.followContainer}>
+          <Link to={`/${user.username}/followers`}>
+            <span className={css.count}>{user.followersCount}</span>
             Followers
           </Link>
-          <div className={Styles.following}>
-            <Link to={`/${user.name}/following`}>
-              <span className={Styles.count}>{user.followingCount}</span>
+          <div className={css.following}>
+            <Link to={`/${user.username}/following`}>
+              <span className={css.count}>{user.followingCount}</span>
               Following
             </Link>
           </div>

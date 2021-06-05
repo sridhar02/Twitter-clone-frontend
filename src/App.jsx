@@ -4,7 +4,7 @@ import { Switch, Route, useHistory, Redirect } from 'react-router-dom';
 
 import Login from './components/login';
 import Tweet from './components/Tweet';
-import Tweets from './components/Tweets';
+import UserTimeline from './components/UserTimeline';
 import Signup from './components/signup';
 import Profile from './components/Profile';
 import TimeLine from './components/TimeLine';
@@ -73,9 +73,6 @@ function App() {
         <Route path="/tweet/:id">
           <Tweet user={user} />
         </Route>
-        <Route path="/tweets">
-          <Tweets user={user} />
-        </Route>
         <Route exact path="/:username/:followType">
           <Follow user={user} />
         </Route>
@@ -86,7 +83,7 @@ function App() {
           <Profile authUser={user} />
         </Route>
         <Route exact path="/">
-          <Tweets user={user} />
+          <UserTimeline user={user} />
         </Route>
         <Route>
           <Redirect to={`/timeline/${user.username}`} />

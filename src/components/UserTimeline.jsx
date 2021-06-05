@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import TweetCard from './TweetCard';
-import Styles from './Tweets.module.css';
+import css from './Tweets.module.css';
 import NewTweet from './NewTweet';
 
 const fetchTweets = async (offset) => {
@@ -16,10 +16,11 @@ const fetchTweets = async (offset) => {
   return response.data;
 };
 
-export default function Tweets({ user }) {
+export default function UserTimeline({ user }) {
   const [tweets, setTweets] = useState([]);
   const [offset, setOffset] = useState(0);
   const [more, setMore] = useState(true);
+  const [key, setKey] = useState(0);
 
   const onNext = () => {
     setOffset((t) => t + 10);
@@ -39,15 +40,15 @@ export default function Tweets({ user }) {
     return () => {
       safe = false;
     };
-  }, [offset]);
+  }, [offset, key]);
 
   if (tweets.length === 0 && more) {
     return <div>Loading....</div>;
   }
 
   return (
-    <div className={Styles.container}>
-      <NewTweet user={user} setOffset={setOffset} />
+    <div className={css.container}>
+      <NewTweet user={user} onSuccess={() => setKey(key + 1)} />
       <InfiniteScroll
         dataLength={tweets.length}
         next={onNext}
@@ -61,7 +62,7 @@ export default function Tweets({ user }) {
       >
         {tweets.map((tweet) => (
           <div key={tweet.id}>
-            <Link to={`/tweet/${tweet.id}`} className={Styles.link}>
+            <Link to={`/tweet/${tweet.id}`} className={css.link}>
               <TweetCard tweet={tweet} user={user} />
             </Link>
           </div>

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import styles from './NewTweet.module.css';
 
-export default function NewTweet({ user, setOffset }) {
+export default function NewTweet({ user, onSuccess }) {
   const [inputText, setInputText] = useState('');
 
   const postTweet = async () => {
@@ -17,6 +17,7 @@ export default function NewTweet({ user, setOffset }) {
       const response = await axios.post('/tweet', data);
       if (response.status === 201) {
         setInputText('');
+        onSuccess();
       }
     } catch (error) {
       console.log(error);
